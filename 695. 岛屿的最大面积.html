@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number[][]} grid
+         * @return {number}
+         */
+        var maxAreaOfIsland = function (grid) {
+            let count = 0
+            let points = []
+
+            function isSubArrayInArray(subArray, array) {
+                return array.some(item => {
+                    return item.every((value, index) => value === subArray[index]);
+                });
+            }
+
+            function findArea(i, j) {
+                if (isSubArrayInArray([i, j], points)) {
+                    return
+                }
+                else if ((j < grid[i].length - 1 && grid[i][j + 1] == 1)) {
+                    points.push([i, j + 1])
+                    findArea(i, j + 1)
+                } else if ((i < grid.length - 1 && grid[i + 1][j] == 1)) {
+                    points.push([i + 1, j])
+                    findArea(i + 1, j)
+                }
+                else if ((i >0 && grid[i - 1][j] == 1)) {
+                    points.push([i - 1, j])
+                    findArea(i - 1, j)
+                }
+                else if ((j > 0 && grid[i][j - 1] == 1)) {
+                    points.push([i, j - 1])
+                    findArea(i, j - 1)
+                }
+            }
+            for (let i = 0; i < grid.length; i++) {
+                for (let j = 0; j < grid[i].length; j++) {
+                    if (grid[i][j] == 1) {
+                        if (!isSubArrayInArray([i, j], points)) {
+                            console.log(points);
+                            // console.log(i,j);
+                            count++
+                            points.push([i, j])
+                            findArea(i, j)
+                        }
+                    }
+                }
+            }
+            return count
+        };
+        let grid = [
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+            [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+        ]
+        console.log(maxAreaOfIsland(grid));
+    </script>
+</body>
+
+</html>

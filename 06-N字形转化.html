@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {string} s
+         * @param {number} numRows
+         * @return {string}
+         */
+        var convert = function (s, numRows) {
+            let result = []
+            string = s.split('')
+            let flag = true
+            let i = 0
+            let j = 0
+            string.forEach(el => {
+                if (!result[i]) {
+                    result[i] = [];
+                }
+                result[i].push(el)
+                if (flag) {
+                    if (i == numRows -2) {
+                        flag = false
+                    }
+                    i++
+                }
+                else{
+                    j++
+                    i--
+                    if (i==0) {
+                        flag = true
+                    }
+                }
+            });
+            let realResult = ''
+            for (let index = 0; index < result.length; index++) {
+                realResult = realResult+result[index].join('')
+            }
+            return realResult
+        };
+        let s = "PAYPALISHIRING", numRows = 4
+        console.log(convert(s, numRows));
+    </script>
+</body>
+
+</html>

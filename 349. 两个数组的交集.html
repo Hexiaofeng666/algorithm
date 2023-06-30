@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function(nums1, nums2) {
+    let result = []
+    nums1.forEach(el => {
+        if (nums2.indexOf(el)!= -1) {
+            result.push(el)
+        }
+    });
+    return Array.from(new Set(result))
+};
+let nums1 = [1,2,2,1], nums2 = [2,2]
+console.log(intersection(nums1, nums2));
+    </script>
+</body>
+</html>

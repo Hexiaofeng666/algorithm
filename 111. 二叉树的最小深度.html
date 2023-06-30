@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for a binary tree node.
+         * function TreeNode(val, left, right) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.left = (left===undefined ? null : left)
+         *     this.right = (right===undefined ? null : right)
+         * }
+         */
+        var minDepth = function (root) {
+            if (!root) return 0
+            let min = Infinity
+            // 递归遍历时，记录当前的层级（深度）
+            const dfs = (root, cLevel) => {
+                // 无左右节点时，比较当前深度和最小深度
+                if (!root.left && !root.right) min = Math.min(min, cLevel)
+
+                root.left && dfs(root.left, cLevel + 1)
+                root.right && dfs(root.right, cLevel + 1)
+            }
+            dfs(root, 1)
+            console.log(min);
+            return min
+        };
+        // let root = [3, 9, 20, null, null, 15, 7]
+        let root = [3, 9, 20, null, null, 15, 7]
+        console.log(minDepth(root));
+    </script>
+</body>
+
+</html>

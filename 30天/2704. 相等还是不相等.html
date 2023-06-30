@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {string} val
+         * @return {Object}
+         */
+        var expect = function (val) {
+            return {
+                toBe(params) {
+                    if (params === val) {
+                        return true
+                    }
+                    else throw "Not Equal"
+                    // return params == val?{"value": true}:{"error": "Not Equal"}
+                },
+                notToBe(params){
+                    if (params !== val) {
+                        return true
+                    }
+                    else throw "Equal"
+                    // return params != val?{"value": true}:{"error": "Equal"}
+                }
+            }
+        };
+
+        console.log(expect('5').toBe(5));
+        console.log(expect(5).notToBe(5));
+        /**
+         * expect(5).toBe(5); // true
+         * expect(5).c(5); // throws "Equal"
+         */
+    </script>
+</body>
+
+</html>

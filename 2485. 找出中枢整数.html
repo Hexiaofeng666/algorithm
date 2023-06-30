@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number} n
+         * @return {number}
+         */
+        // 等差数列的和=(首数+尾数)*项数/2;
+        var pivotInteger = function (n) {
+            for (i = 1; i <= n; i++) {
+                if ((1+i)*i/2 == (i+n)*(n-i+1)/2) {
+                    return i
+                }
+            }
+            return -1
+        };
+        console.log(pivotInteger(8));
+    </script>
+</body>
+
+</html>
