@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myButton">这是一个div</button>
+    <script>
+        function addEvent(element, type, handler) {
+            if (element.addEventListener) {
+                addEvent = function (element, type, handler) {
+                    element.addEventListener(type, handler, false);
+                };
+            } else if (element.attachEvent) {
+                addEvent = function (element, type, handler) {
+                    element.attachEvent("on" + type, handler);
+                };
+            } else {
+                addEvent = function (element, type, handler) {
+                    element["on" + type] = handler;
+                };
+                return addEvent(element, type, handler); //首次调用
+            }
+            addEvent(element, type, handler)
+        }
+        // 使用示例
+        const myButton = document.getElementById("myButton");
+        addEvent(myButton, "click", function () {
+            console.log("Button clicked! ");
+        });
+    </script>
+</body>
+
+</html>

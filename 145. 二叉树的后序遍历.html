@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * Definition for a binary tree node.
+         * function TreeNode(val, left, right) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.left = (left===undefined ? null : left)
+         *     this.right = (right===undefined ? null : right)
+         * }
+         */
+        /**
+         * @param {TreeNode} root
+         * @return {number[]}
+         */
+        var postorderTraversal = function (root) {
+            let res = []
+            for (let i = root.length - 1; i >= 0; i--) {
+                if (root[i]) {
+                    res.push(root[i])
+                }
+            }
+            return res
+        };
+        let root = [1, null, 4,2, 3]
+        console.log(postorderTraversal(root));
+    </script>
+</body>
+
+</html>

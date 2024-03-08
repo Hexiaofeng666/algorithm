@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {Function[]} functions
+         * @return {Function}
+         */
+        var compose = function (functions) {
+            return function (x) {
+                for (let i = functions.length - 1; i >= 0; i--) {
+                    x = functions[i](x)
+                }
+                return x
+            }
+        };
+        const fn = compose([x => x + 1, x => 2 * x])
+        console.log(fn(4));
+        /**
+         * const fn = compose([x => x + 1, x => 2 * x])
+         * fn(4) // 9
+         */
+
+        // 输出： functions = [x => 10 * x, x => 10 * x, x => 10 * x], x = 1
+        // 输入： 1000
+        // 解释：
+        // 从右向左计算......
+        //     10 * (1) = 10
+        // 10 * (10) = 100
+        // 10 * (100) = 1000
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {Promise} promise1
+         * @param {Promise} promise2
+         * @return {Promise}
+         */
+        var addTwoPromises = async function (promise1, promise2) {
+            const res = await Promise.all([promise1, promise2])
+            console.log(res);
+            // return res1 + res2
+        };
+        const promise1 = new Promise(resolve => setTimeout(() => resolve(2), 20))
+        const promise2 = new Promise(resolve => setTimeout(() => resolve(5), 60))
+        addTwoPromises(Promise.resolve(2), Promise.resolve(2)).then(console.log);
+        /**
+         * addTwoPromises(Promise.resolve(2), Promise.resolve(2))
+         *   .then(console.log); // 4
+         */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        globalThis.a = 100;
+
+        function fn() {
+            console.log(this);
+            return {
+                a: 200,
+                m: function () {
+                    console.log(this.a);
+                },
+                n: () => {
+                    console.log(this);
+                    console.log(this.a);
+                },
+                k: function () {
+                    return function () {
+                        console.log(this.a)
+                    };
+                },
+                o: function () {
+                    return ()=>{
+                        console.log(this.a)
+                    };
+                }
+            }
+        }
+        const fn0 = fn();
+        fn0.m(); // 输出 200，this指向 {a,m,n}
+        fn0.n(); // 输出 100, this 指向 globalThis
+        fn0.k()(); // 输出 100， this 指向 globalThis
+        fn0.o()() // 200
+        const context = {
+            a: 300
+        }
+        const fn1 = fn.call(context);
+        // 改变箭头函数 this指向
+        fn1.m(); // 输出 200，this指向 fa,m, nj.cc
+        fn1.n(); // 输出 300， this 指向 context
+        fn1.k().call(context); // 输出 300, this 指向 context
+        fn0.o().call(context); // 200
+    </script>
+</body>
+
+</html>

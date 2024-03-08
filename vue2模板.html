@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯vue2</title>
+    <style>
+ 
+    </style>
+</head>
+ 
+<body>
+    <div class="page" id="app">
+        <div class="head pubSet">
+            <ul class="nav">
+                <li v-for="item in navList">{{item}}</li>
+            </ul>
+        </div>
+        <div class="main pubSet">这里是相关内容</div>
+        <button @click="deleteItem">点击去除</button>
+    </div>
+    <script src="https://unpkg.com/vue@2.7.15/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                navList:[0,2,3,3,4,56]
+            },
+            created: function () {
+ 
+            },
+            methods: {
+                deleteItem(){
+                    // Vue.delete(this.navList, 0)
+                    // delete操作不会触发vue的响应系统，因此不会引起视图的更新,并且数组长度不会变。
+                    // delete this.navList[0]
+                    this.navList.splice(0,1)
+                    // this.$forceUpdate()
+                    console.log(this.navList);
+                }
+            },
+        })
+    </script>
+</body>
+ 
+</html>

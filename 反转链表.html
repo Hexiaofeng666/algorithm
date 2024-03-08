@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 根据数组创建链表
+        function createLinkList(arr) {
+            const length = arr.length
+            if (!length) return
+            let current = {
+                value: arr[length - 1]
+            }
+            let i = length - 2
+            while (i >= 0) {
+                current = {
+                    value: arr[i],
+                    next: current
+                }
+                i--
+            }
+            return current
+        }
+        const arr = [100, 200, 300, 400, 500]
+        let linkList =  createLinkList(arr)
+        console.log('反转前',linkList);
+        function reverseLinkedList(linkList) {
+            let prev = null
+            let current = linkList
+            while (current != null) {
+                let nextTemp = current.next
+                current.next = prev
+                prev = current
+                current = nextTemp
+            }
+            return prev
+        }
+        console.log('反转后',reverseLinkedList(linkList));
+    </script>
+</body>
+
+</html>
