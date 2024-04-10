@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="clickDebounce(10,2)">防抖</button>
+    <button onclick="clickThrottle(2,3,4)">节流</button>
+    <script>
+      // 防抖的原理是在一定时间内，如果事件持续触发，则重新计时，直到事件触发间隔超过指定时间后再执行。
+      function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            func.apply(this, args);
+          }, delay);
+        };
+      }
+      // const clickDebounce = debounce((...arg) => {
+      //   console.log("防抖", ...arg, this);
+      // }, 1000);
+
+      function clickDebounce(...arg) {
+        const debouncedFunction = debounce(() => {
+          console.log("防抖", ...arg, this);
+        }, 1000);
+        return debouncedFunction;
+      }
+
+      // 节流是指在一定时间内只执行一次，不论事件触发频率有多高，都会按照固定的频率执行。节流常用于处理滚动事件、resize 事件等
+      function throttle(func, delay) {
+        let timer;
+        return function (...args) {
+          if (!timer) {
+            timer = setTimeout(() => {
+              func.apply(this, args);
+              timer = null;
+            }, delay);
+          }
+        };
+      }
+      const clickThrottle = throttle((...args) => {
+        console.log("节流", ...args, this);
+      }, 1000);
+    </script>
+  </body>
+</html>
