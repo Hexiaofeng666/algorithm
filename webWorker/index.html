@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="startWorker()">Start Worker</button>
+    <p id="output"></p>
+    <script src="./worker.js"></script>
+    <script>
+        // 启动 Worker
+        function startWorker() {
+            const worker = new Worker('worker.js');
+
+            // 监听从 Worker 返回的消息
+            worker.onmessage = function(event) {
+                console.log(event, 'html-event');
+                document.getElementById('output').textContent = `Result: ${result}`;
+            };
+
+            // 向 Worker 发送消息
+            const input = 40; // 输入数据
+            worker.postMessage(input);
+        }
+    </script>
+</body>
+</html>
