@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drag and Drop Example</title>
+<style>
+  .block {
+    width: 100px;
+    height: 50px;
+    background-color: lightblue;
+    margin-bottom: 10px;
+    cursor: grab;
+    user-select: none;
+  }
+  .highlight {
+    border: 2px dashed gray;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div class="block" draggable="true">Block 1</div>
+  <div class="block" draggable="true">Block 2</div>
+  <div class="block" draggable="true">Block 3</div>
+  <div class="block" draggable="true">Block 4</div>
+  <div class="block" draggable="true">Block 5</div>
+</div>
+
+<script>
+  const container = document.getElementById('container');
+  let draggingElement = null;
+
+  function dragStart(event) {
+    draggingElement = event.target;
+    event.dataTransfer.setData('text/plain', draggingElement.textContent);
+  }
+
+  function dragEnd() {
+    draggingElement = null;
+  }
+
+  function dragEnter(event) {
+    if (event.target.classList.contains('block')) {
+      event.target.classList.add('highlight');
+    }
+  }
+
+  function dragLeave(event) {
+    if (event.target.classList.contains('block')) {
+      event.target.classList.remove('highlight');
+    }
+  }
+
+  function drop(event) {
+    console.log(event);
+    event.preventDefault();
+    if (event.target.classList.contains('block')) {
+      event.target.classList.remove('highlight');
+      const targetContent = event.target.textContent;
+      event.target.textContent = event.dataTransfer.getData('text/plain');
+      draggingElement.textContent = targetContent;
+    }
+  }
+
+  container.addEventListener('dragstart', dragStart);
+  container.addEventListener('dragend', dragEnd);
+  container.addEventListener('dragenter', dragEnter);
+  container.addEventListener('dragleave', dragLeave);
+  container.addEventListener('dragover', (event) => event.preventDefault());
+  container.addEventListener('drop', drop);
+</script>
+
+</body>
+</html>
